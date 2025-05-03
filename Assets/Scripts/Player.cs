@@ -29,8 +29,8 @@ public class Player : MonoBehaviour
         }
 
         Vector2 position = transform.position;
-        position.x = position.x + 0.1f * horizontal;
-        position.y = position.y + 0.1f * vertical;
+        position.x += 0.1f * horizontal;
+        position.y += 0.1f * vertical;
 
         transform.position = position;
     }
@@ -47,14 +47,5 @@ public class Player : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        //if (collision.gameObject.tag == "Obstacle") {
-        //    curHealth--;
-        //    Destroy(player);
-        //    player = Instantiate(playerPrefab, new Vector2(-7f,0), Quaternion.identity);
-        //    Debug.Log("Collision Detected. Players new health is: " + curHealth);
-        //    if (curHealth == 0) { 
-        //        Destroy(player);
-        //    }
-        //}
     }
 }
