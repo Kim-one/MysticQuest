@@ -5,13 +5,16 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
+    public GameObject playerPrefab;
     public int maxHealth = 5;
     public int curHealth;
     // Start is called before the first frame update
     void Start()
     {
-        curHealth = maxHealth;
+        if (curHealth == 0){
+            curHealth = maxHealth;
+        }   
     }
 
     // Update is called once per frame
@@ -34,14 +37,24 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle") {
-            Destroy(player);
+        if(collision.gameObject.tag == "Obstacle")
+        {
             curHealth--;
-            Instantiate(player, new Vector3(-5f, 0, 0), Quaternion.identity);
-            Debug.Log("Collision Detected. Players new health is: " + curHealth);
-            if (curHealth == 0) { 
-                Destroy(player);
+            Debug.Log("Collision detected. Players health is: " + curHealth);
+            if (curHealth > 0)
+            {
+                Instantiate(playerPrefab, new Vector2(-7f, 0), Quaternion.identity);
             }
+            Destroy(gameObject);
         }
+        //if (collision.gameObject.tag == "Obstacle") {
+        //    curHealth--;
+        //    Destroy(player);
+        //    player = Instantiate(playerPrefab, new Vector2(-7f,0), Quaternion.identity);
+        //    Debug.Log("Collision Detected. Players new health is: " + curHealth);
+        //    if (curHealth == 0) { 
+        //        Destroy(player);
+        //    }
+        //}
     }
 }
